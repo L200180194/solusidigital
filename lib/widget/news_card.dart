@@ -11,7 +11,6 @@ class NewsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Intl.defaultLocale = 'pt_BR';
     return Container(
       color: Colors.white,
       padding: EdgeInsets.fromLTRB(defaultMargin, 11.h, defaultMargin, 10.h),
@@ -36,7 +35,7 @@ class NewsCard extends StatelessWidget {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: primaryTS.copyWith(
-                fontSize: 20.sp,
+                fontSize: 18.sp,
                 fontWeight: bold,
               ),
             ),
@@ -49,20 +48,21 @@ class NewsCard extends StatelessWidget {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: primaryTS.copyWith(
-                  fontSize: 14.sp, color: const Color(0xffAAAAAA)),
+                  fontSize: 10.sp, color: const Color(0xffAAAAAA)),
             ),
           ),
           Container(
             margin: EdgeInsets.fromLTRB(defaultMargin, 0, defaultMargin, 10.h),
             child: Text(
-              DateFormat.yMMMMd('en_US')
-                  .add_jm()
-                  .format(news.publishedAt as DateTime),
+              DateFormat.yMMMMd('id')
+                      .add_jm()
+                      .format(news.publishedAt as DateTime) +
+                  ' WIB',
               textAlign: TextAlign.justify,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: primaryTS.copyWith(
-                  fontSize: 14.sp, color: const Color(0xffAAAAAA)),
+                  fontSize: 10.sp, color: const Color(0xffAAAAAA)),
             ),
           ),
           Container(
@@ -73,7 +73,7 @@ class NewsCard extends StatelessWidget {
               maxLines: 3,
               overflow: TextOverflow.clip,
               style: primaryTS.copyWith(
-                  fontSize: 15.sp, color: const Color(0xff5A5A5A)),
+                  fontSize: 14.sp, color: const Color(0xff5A5A5A)),
             ),
           ),
           GestureDetector(

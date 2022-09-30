@@ -7,8 +7,9 @@ import 'package:solusidigital/providers/news_provider.dart';
 import 'package:solusidigital/theme.dart';
 import 'package:solusidigital/widget/mews_card.dart';
 import 'package:solusidigital/widget/search_bar.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import '../widget/banner.dart';
-
 import '../widget/card_antrian.dart';
 import '../widget/action_button.dart';
 
@@ -24,6 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     getInit();
+    initializeDateFormatting("id");
+    print(DateTime.now().toString());
     super.initState();
   }
 
@@ -38,51 +41,70 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     NewsProvider np = Provider.of<NewsProvider>(context);
     final screenData = MediaQuery.of(context);
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          bottom: const PreferredSize(
-              child: SearchBar(), preferredSize: Size.fromHeight(48.0)),
-          actions: [
-            Row(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(right: 13.w),
-                  child: Text(
-                    'Hi, Bagus',
-                    style: primaryTS.copyWith(fontWeight: bold),
-                  ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        bottom: const PreferredSize(
+            child: SearchBar(), preferredSize: Size.fromHeight(48.0)),
+        actions: [
+          Row(
+            children: [
+              Container(
+                margin: EdgeInsets.only(right: 13.w),
+                child: Text(
+                  'Hi, Bagus',
+                  style: primaryTS.copyWith(fontWeight: bold),
                 ),
-                Image.asset('assets/images/user (1).png')
-              ],
-            ),
-            SizedBox(
-              width: 13.w,
-            ),
-          ],
-        ),
-        backgroundColor: const Color(0xffF4F4F4),
-        body: (isLoading == true)
-            ? Container(
-                child: SpinKitRing(
-                  color: blueColor,
-                  size: 50.0,
-                ),
-              )
-            : RefreshIndicator(
-                onRefresh: () {
-                  setState(() {
-                    isLoading = true;
-                  });
-                  return getInit();
+              ),
+              Image.asset('assets/images/user (1).png')
+            ],
+          ),
+          SizedBox(
+            width: 13.w,
+          ),
+        ],
+      ),
+      backgroundColor: const Color(0xffF4F4F4),
+      body: (isLoading == true)
+          ? Container(
+              child: SpinKitRing(
+                color: blueColor,
+                size: 50.0,
+              ),
+            )
+          : RefreshIndicator(
+              onRefresh: () {
+                setState(() {
+                  isLoading = true;
+                });
+                return getInit();
+              },
+              child: ShaderMask(
+                shaderCallback: (Rect rect) {
+                  return LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.transparent,
+                      Colors.transparent,
+                      Colors.transparent,
+                      Colors.purple
+                    ],
+                    stops: [
+                      0.0,
+                      0.1,
+                      0.9,
+                      1.0
+                    ], // 10% purple, 80% transparent, 10% purple
+                  ).createShader(rect);
                 },
+                blendMode: BlendMode.dstOut,
                 child: ListView(
                   children: [
                     Container(
                       color: Colors.white,
-                      padding: EdgeInsets.only(top: 15.h),
+                      padding: EdgeInsets.only(top: 0),
                       child: Column(
                         children: [
                           CardAntrian(screenData: screenData),
@@ -107,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-      ),
+            ),
     );
   }
 }

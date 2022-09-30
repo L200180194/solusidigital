@@ -27,7 +27,7 @@ class CardAntrian extends StatelessWidget {
           return Column(
             children: [
               Container(
-                height: constraints.maxHeight * 0.3,
+                height: constraints.maxHeight * 0.2,
                 padding: EdgeInsets.fromLTRB(23.h, 10.h, 23.h, 0),
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -74,7 +74,7 @@ class CardAntrian extends StatelessWidget {
                                       style: primaryTS.copyWith(
                                           color: Colors.white,
                                           fontWeight: bold,
-                                          fontSize: 17.sp)),
+                                          fontSize: 25.sp)),
                                 ),
                               )
                             ],
@@ -115,7 +115,7 @@ class CardAntrian extends StatelessWidget {
                                       style: primaryTS.copyWith(
                                           color: Colors.white,
                                           fontWeight: bold,
-                                          fontSize: 17.sp)),
+                                          fontSize: 25.sp)),
                                 ),
                               )
                             ],

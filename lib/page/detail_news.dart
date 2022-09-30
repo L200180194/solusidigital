@@ -60,9 +60,10 @@ class DetailNews extends StatelessWidget {
             margin: EdgeInsets.fromLTRB(
                 defaultMargin * 2, 0, defaultMargin * 2, 10.h),
             child: Text(
-              DateFormat.yMMMMd('en_US')
-                  .add_jm()
-                  .format(news.publishedAt as DateTime),
+              DateFormat.yMMMMd('id')
+                      .add_jm()
+                      .format(news.publishedAt as DateTime) +
+                  ' WIB',
               textAlign: TextAlign.justify,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
